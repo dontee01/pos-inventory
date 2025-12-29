@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="10px" height="11px" viewBox="0 0 10 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>-g-exit-to-app</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="nav_bar" transform="translate(-68.000000, -706.000000)" fill="#000000">
+            <g id="-g-exit-to-app" transform="translate(68.000000, 706.233398)">
+                <path d="M3.94444444,7 L4.72222222,7.77777778 L7.5,5 L4.72222222,2.22222222 L3.94444444,3 L5.38888889,4.44444444 L0,4.44444444 L0,5.55555556 L5.38888889,5.55555556 L3.94444444,7 L3.94444444,7 Z M8.88888889,0 L1.11111111,0 C0.5,0 0,0.5 0,1.11111111 L0,3.33333333 L1.11111111,3.33333333 L1.11111111,1.11111111 L8.88888889,1.11111111 L8.88888889,8.88888889 L1.11111111,8.88888889 L1.11111111,6.66666667 L0,6.66666667 L0,8.88888889 C0,9.5 0.5,10 1.11111111,10 L8.88888889,10 C9.5,10 10,9.5 10,8.88888889 L10,1.11111111 C10,0.5 9.5,0 8.88888889,0 L8.88888889,0 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,9 @@
+/*.printable { display: none; }*/
+
+@media print
+{
+    .non-printable { display: none; }
+    .nano { display: none; }
+    .navbar { display: none; }
+    .printable { display: block; }
+}

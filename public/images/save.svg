@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="10px" height="11px" viewBox="0 0 10 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>-g-save</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="nav_bar" transform="translate(-68.000000, -476.000000)" fill="#000000">
+            <g id="-g-save" transform="translate(68.000000, 476.363636)">
+                <path d="M7.77777778,0 L1.11111111,0 C0.5,0 0,0.5 0,1.11111111 L0,8.88888889 C0,9.5 0.5,10 1.11111111,10 L8.88888889,10 C9.5,10 10,9.5 10,8.88888889 L10,2.22222222 L7.77777778,0 L7.77777778,0 Z M5,8.88888889 C4.05555556,8.88888889 3.33333333,8.16666667 3.33333333,7.22222222 C3.33333333,6.27777778 4.05555556,5.55555556 5,5.55555556 C5.94444444,5.55555556 6.66666667,6.27777778 6.66666667,7.22222222 C6.66666667,8.16666667 5.94444444,8.88888889 5,8.88888889 L5,8.88888889 Z M6.66666667,3.33333333 L1.11111111,3.33333333 L1.11111111,1.11111111 L6.66666667,1.11111111 L6.66666667,3.33333333 L6.66666667,3.33333333 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
