@@ -157,7 +157,9 @@ class PurchaseController extends Controller
         $cart->i_name = strtoupper($request->item_name);
         $cart->item_id = $request->item_id;
         $cart->s_name = $request->supplier;
-        $cart->no_exchange = $request->purchase_type;
+        if ($request->is_rgb == 1) {
+            $cart->no_exchange = $request->purchase_type;
+        }
         $cart->is_rgb = $request->is_rgb;
         $cart->price_unit = $request->price;
         $cart->price_total = $request->sub_total;
