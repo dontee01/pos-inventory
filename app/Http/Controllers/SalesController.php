@@ -137,7 +137,7 @@ class SalesController extends Controller
         $name = ucfirst($request->name);
         $amount_paid = $request->amount;
         // generate receipt
-        $receipt = rand(11111111, 99999999);
+        $receipt = $this->generateReceipt();
         foreach ($orders as $order)
         {
             $d_name = $order->d_name;
@@ -216,8 +216,92 @@ class SalesController extends Controller
         session()->forget('print_session');
 
         $request->session()->flash('flash_message_success', 'Sales Processed. Ensure to print this receipt before navigating away');
+        // return view('print-sales', ['cart_items' => $result, 'price_total' => number_format($total, 2), 'transaction_ref' => $transaction_ref, 'receipt' => $receipt, 'r_name' => $name, 'amount_paid' => number_format($amount_paid, 2), 'is_discount' => $is_discount, 'difference' => number_format($difference, 2)]);
+        return redirect('/sales/receipt/'.$transaction_ref);
+    }
+
+    public function receipt(Request $request, $ref)
+    {
+        // if (! session()->has('print_session'))
+        // {
+        //     // redirect if print session does not exist
+        //     $request->session()->flash('flash_message', 'No order to process');
+        //     return redirect('/sales');
+        // }
+        
+        $sales = SalesLog::where('transaction_ref', $ref)
+            ->orWhere('receipt', $ref)
+            ->first();
+
+        if (!$sales)
+        {
+            $request->session()->flash('flash_message', 'No transaction found');
+            return redirect('/sales');
+        }
+        
+        // $d_name = $sales->d_name;
+        $difference = $sales->difference;
+        $is_discount = $sales->is_debtor_discount;
+        $amount_paid = $sales->amount_paid;
+        $name = $sales->name;
+        $total = $sales->total;
+        $receipt = $sales->receipt;
+        $transaction_ref = $sales->transaction_ref;
+
+        $orders = PendingOrder::where('transaction_ref', $transaction_ref)
+            ->where('is_confirmed', 2)
+            ->get();
+        if ($orders->isEmpty())
+        {
+            $request->session()->flash('flash_message', 'An error occurred with this transaction. Contact support.');
+            return redirect('/sales');
+        }
+        $result = [];
+
+        foreach ($orders as $order)
+        {
+            $d_name = $order->d_name;
+            $returned_qty = $order->returned_qty;
+            $returned_bottle = $order->returned_bottle;
+            if (empty($returned_qty))
+            {
+                $returned_qty = 0;
+            }
+            if (empty($returned_bottle))
+            {
+                $returned_bottle = 0;
+            }
+
+            if ($order->is_rgb == 0)
+            {
+                $quantity = $order->qty - $returned_qty;
+            }
+            if ($order->is_rgb == 1)
+            {
+                $quantity = $order->qty - $returned_qty;
+            }
+            // get categoriesId and item name using itemId from cart table
+            $cart_item = Item::find($order->item_id);
+                // print_r($cart_item);exit;
+            $cat_name = Category::find($cart_item->categories_id)
+            ->name;
+            $item_name = $cat_name.'  '.$cart_item->i_name;
+            
+            $item_id = $order->item_id;
+            $item_arr = [
+                'id' => $order->id, 'i_name' => $item_name, 'qty' => $quantity, 'd_name' => $order->d_name,
+                'price_total' => number_format($order->price_total, 2), 'is_rgb' => $order->is_rgb, 'transaction_ref' => $order->transaction_ref
+            ];
+            // $total += $order->price_total;
+            array_push($result, $item_arr);
+        }
+
+        // remove print session to avoid duplicate sales table update on page reload
+        // session()->forget('print_session');
+
+        // var_dump(number_format($amount_paid, 2));exit;
+        $request->session()->flash('flash_message_success', 'Sales Processed. Ensure to print this receipt before navigating away');
         return view('print-sales', ['cart_items' => $result, 'price_total' => number_format($total, 2), 'transaction_ref' => $transaction_ref, 'receipt' => $receipt, 'r_name' => $name, 'amount_paid' => number_format($amount_paid, 2), 'is_discount' => $is_discount, 'difference' => number_format($difference, 2)]);
-        // return redirect('/sales');
     }
 
     // ///////////////////INDIVIDUAL SALES/////////////////////
@@ -709,6 +793,19 @@ class SalesController extends Controller
         $request->session()->flash('flash_message_success', 'Sales Processed. Ensure to print the receipt before navigating away');
         return view('welcome', ['cart_items' => $result, 'price_total' => $total, 'transaction_ref' => $transaction_ref, 'receipt' => $receipt, 'r_name' => $name, 'amount_paid' => $amount_paid]);
         // return redirect('/sales');
+    }
+
+    public function generateReceipt()
+    {
+        $receipt = 10000000;
+        $sales = SalesLog::latest()->first();
+        // var_dump($sales);exit;
+        if ($sales)
+        {
+            $last_receipt = $sales->receipt;
+            $receipt = $last_receipt + 1;
+        }
+        return $receipt;
     }
 
 }

@@ -115,6 +115,8 @@ Route::group(['prefix' => 'sales', 'middleware' => 'login'], function() {
     Route::get('/bottle', [SalesController::class, 'bottle_show']);
     Route::post('/bottle/add', [SalesController::class, 'bottle_add']);
     Route::get('/test', [SalesController::class, 'test']);
+
+    Route::get('/receipt/{transaction_ref}', [SalesController::class, 'receipt']);
 });
 
 Route::group(['prefix' => 'purchase', 'middleware' => 'login'], function() {
