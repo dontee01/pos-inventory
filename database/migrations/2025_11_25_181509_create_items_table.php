@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('qty')->nullable();
             $table->string('qty_bottle')->nullable();
             $table->string('qty_content')->nullable();
+            $table->decimal('cost_price', 10, 2);
             $table->decimal('price_unit', 10, 2);
             $table->enum('status', ['inactive', 'active'])->default('active');
             $table->timestamps();

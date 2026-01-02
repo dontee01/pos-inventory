@@ -145,6 +145,7 @@ class PurchaseController extends Controller
         $validate = $request->validate([
             // 'is_rgb' => 'required',
             'quantity' => 'required|numeric',
+            'cost_price' => 'required|numeric',
             'price' => 'required|numeric',
             'amount' => 'required|numeric',
         ]);
@@ -161,6 +162,7 @@ class PurchaseController extends Controller
             $cart->no_exchange = $request->purchase_type;
         }
         $cart->is_rgb = $request->is_rgb;
+        $cart->cost_price = $request->cost_price;
         $cart->price_unit = $request->price;
         $cart->price_total = $request->sub_total;
         $cart->transaction_ref = $request->transaction_ref;
@@ -256,6 +258,7 @@ class PurchaseController extends Controller
         $validate = $request->validate([
             // 'is_rgb' => 'required',
             'quantity' => 'required|numeric',
+            'cost_price' => 'required|numeric',
             'price' => 'required|numeric',
         ]);
 
@@ -273,6 +276,7 @@ class PurchaseController extends Controller
         // $cart->no_exchange = $request->purchase_type;
         $cart->is_bottle = 1;
         $cart->is_rgb = 1;
+        $cart->cost_price = $request->cost_price;
         $cart->price_unit = $request->price;
         $cart->price_total = round($request->sub_total, 2);
         $cart->amount_paid = round($request->amount_paid, 2);
@@ -391,11 +395,18 @@ class PurchaseController extends Controller
                     'transaction_ref' => $cart_order->transaction_ref, 's_name' => $cart_order->s_name,
                     'i_name' => $cart_order->i_name, 'is_rgb' => $cart_order->is_rgb, 'is_bottle' => $cart_order->is_bottle,
                     'qty_bottle' => $cart_order->qty_bottle, 'qty' => $cart_order->qty, 'no_exchange' => $cart_order->no_exchange, 'qty_rebate' => $cart_order->qty_rebate, 'amount_paid' => $cart_order->amount_paid, 'is_rebate' => $cart_order->is_rebate,
-                    'price_unit' => $cart_order->price_unit,
+                    'price_unit' => $cart_order->price_unit, 'cost_price' => $cart_order->cost_price,
                     'price_total' => $cart_order->price_total, 'is_confirmed' => 1
                 ];
 // var_dump($p_order_data);exit;
                 $p_order = PurchaseLog::create($p_order_data);
+
+                // update item with current purchase cost price and unit selling price
+                $item = Item::findOrFail($cart_order->item_id);
+                $item->cost_price = $cart_order->price_unit;
+                $item->price_unit = $cart_order->price_unit;
+                
+                $item->save();
 
             }
             $cart = CartPurchase::where('cart_session', $request->purchase_cart_session)
@@ -420,7 +431,7 @@ class PurchaseController extends Controller
             $item_name = $cat_name.'  '.$cart_item->i_name;
             $item_arr = [
                 'id' => $order->id, 'i_name' => $item_name, 's_name' => $order->s_name, 'qty' => $order->qty, 
-                'price_total' => $order->price_total, 'transaction_ref' => $order->transaction_ref
+                'price_total' => $order->price_total, 'transaction_ref' => $order->transaction_ref, 'cost_price' => $order->cost_price
             ];
             array_push($result, $item_arr);
         }

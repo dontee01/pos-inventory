@@ -48,7 +48,7 @@
                         <li><a class="icon-people" id="groups" href="{{url('suppliers')}}">Suppliers</a></li>
                         <li><a class="icon-people" id="groups" href="{{url('drivers')}}">Drivers</a></li>
                         <li><a class="icon-people" id="groups" href="{{url('users')}}">Users</a></li>
-                        <li><a class="icon-people" id="groups" href="{{url('purchase/bottle')}}">Purchase Bottle</a></li>
+                        <li><a class="icon-people" id="groups" href="{{url('purchase/bottle')}}">RGB Purchase (Empty Bottles)</a></li>
                     @endif
                         <li><a class="icon-people" id="groups" href="{{url('sales/bottle')}}">RGB Sales</a></li>
                         <li><a class="icon-people" id="groups" href="{{url('bottle/show')}}">Bottle Log</a></li>

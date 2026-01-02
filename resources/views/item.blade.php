@@ -40,6 +40,7 @@
         <th>Content (Crates)</th>
         <th>Empty Bottles (Crates)</th>
         <th>Quantity (For Non-RGB)</th>
+        <th>Cost Price</th>
         <th>Unit Price</th>
         <th>Action</th>
     </tr>
@@ -65,6 +66,7 @@
         {{$item['qty']}}
         @endif
         </td>
+        <td>{{$item['cost_price']}}</td>
         <td>{{$item['price_unit']}}
         <input type="hidden" id="id-add-item" value="{{$item['id']}}" />
         </td>

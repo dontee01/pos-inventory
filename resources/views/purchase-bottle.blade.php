@@ -38,7 +38,7 @@
         <div class="row">
 
         <div class="col-md-12">
-            <h1>Purchase Bottle</h1>
+            <h1>Purchase Empty Bottles</h1>
 
             <form action="{{url('purchase/bottle/add')}}" method="post">
             {{csrf_field()}}
@@ -79,8 +79,13 @@
                 <div class=" form-inline">
 
                     <div class="form-group form-group-sm">
-                        <input class="input-sm" type="text" v-model="price" name="price" id="add-quantity-price" title="Unit Price" required="required" />
-                        <span class="help-block small">Unit Price</span>
+                        <input class="input-sm" type="text" v-model="price" name="price" id="add-quantity-price" title="Selling Price" required="required" />
+                        <span class="help-block small">Selling Price</span>
+                    </div>
+                    
+                    <div class="form-group form-group-sm">
+                        <input class="input-sm" type="text" v-model="cost_price" name="cost_price" id="cost-price" title="Cost Price" required="required" />
+                        <span class="help-block small">Cost Price</span>
                     </div>
 
                     <div class="form-group form-group-sm">
@@ -89,7 +94,7 @@
                     </div>
 
                     <div class="form-group form-group-sm">
-                        <input class="input-sm" type="text" name="sub_total" id="add-quantity-sub" title="Sub Total" readonly="readonly" value="@{{quantity * price}}" required="required" />
+                        <input class="input-sm" type="text" name="sub_total" id="add-quantity-sub" title="Sub Total" readonly="readonly" value="@{{quantity * cost_price}}" required="required" />
                         <span class="help-block small">Sub Total</span>
                     </div>
                 </div>

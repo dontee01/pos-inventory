@@ -24,6 +24,7 @@ return new class extends Migration
             $table->tinyInteger('no_exchange')->default(0);
             $table->string('qty_bottle')->default(0);
             $table->string('qty');
+            $table->decimal('cost_price', 10, 2);
             $table->decimal('price_unit', 10, 2);
             $table->decimal('price_total', 10, 2);
             $table->tinyInteger('is_confirmed')->default(0);

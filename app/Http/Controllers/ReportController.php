@@ -24,10 +24,11 @@ use App\Libraries\Custom;
 class ReportController extends Controller
 {
     protected $custom;
-    protected $rgb_empty_price = 1200;
+    protected $rgb_empty_price;
     public function __construct()
     {
         $this->custom = new Custom();
+        $this->rgb_empty_price = env('RGB_EMPTY_PRICE', 2000);
         // $this->middleware('login');
     }
 

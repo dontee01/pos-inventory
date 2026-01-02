@@ -89,10 +89,19 @@
         <div class="panel-body">
             <div class="">
                 <div class=form-group>
-                 <input class="form-control" type="text" name="price" id="add-product-price" placeholder="Price" title="Price" value="{{$item['price_unit']}}" />
+                 <input class="form-control" type="text" name="cost_price" id="add-product-cost-price" placeholder="Cost Price" title="Cost Price" value="{{$item['cost_price']}}" />
                 </div>
             </div>
-            <span class="help-block small">Item Price</span>
+            <span class="help-block small">Item Cost Price</span>
+        </div>
+
+        <div class="panel-body">
+            <div class="">
+                <div class=form-group>
+                 <input class="form-control" type="text" name="price" id="add-product-price" placeholder="Selling Price" title="Selling Price" value="{{$item['price_unit']}}" />
+                </div>
+            </div>
+            <span class="help-block small">Item Selling Price</span>
         </div>
 
 

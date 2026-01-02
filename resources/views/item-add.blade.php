@@ -90,7 +90,15 @@
         <div class="panel-body">
             <div class="">
                 <div class=form-group>
-                 <input class="form-control" type="text" name="price" id="add-product-price" placeholder="Price" title="Price" />
+                 <input class="form-control" type="text" name="cost_price" id="add-product-cost-price" placeholder="Cost Price" title="Cost Price" />
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <div class="">
+                <div class=form-group>
+                 <input class="form-control" type="text" name="price" id="add-product-price" placeholder="Selling Price" title="Selling Price" />
                 </div>
             </div>
         </div>

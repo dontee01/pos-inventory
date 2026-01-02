@@ -36,7 +36,7 @@ class ItemController extends Controller
 			$total_item_rgb_content = $cust->get_empty_bottle_info($item->qty_content);
     		$item_arr = [
     			'id' => $item->id, 'category' => $cat_name, 'i_name' => $item->i_name, 'is_rgb' => $item->is_rgb, 'qty' => $item->qty, 'qty_bottle' => $total_item_rgb_empty, 
-    			'qty_content' => $total_item_rgb_content, 'price_unit' => $item->price_unit, 'date' => $item->created_at
+    			'qty_content' => $total_item_rgb_content, 'cost_price' => $item->cost_price, 'price_unit' => $item->price_unit, 'date' => $item->created_at
     		];
     		array_push($result, $item_arr);
     	}
@@ -63,7 +63,7 @@ class ItemController extends Controller
 		$total_item_rgb_content = $cust->get_empty_bottle_info($item->qty_content);
 		$result = [
 			'id' => $item->id, 'category' => $cat_name, 'i_name' => $item->i_name, 'is_rgb' => $item->is_rgb, 'qty' => $item->qty, 'qty_bottle' => $item->qty_bottle, 
-			'qty_content' => $item->qty_content, 'price_unit' => $item->price_unit, 'rgb_qty_bottle' => $total_item_rgb_empty, 'rgb_qty_content' => $total_item_rgb_content, 'date' => $item->created_at
+			'qty_content' => $item->qty_content, 'cost_price' => $item->cost_price, 'price_unit' => $item->price_unit, 'rgb_qty_bottle' => $total_item_rgb_empty, 'rgb_qty_content' => $total_item_rgb_content, 'date' => $item->created_at
 		];
     	return view('item-edit', ['item' => $result]);
     }
@@ -78,6 +78,7 @@ class ItemController extends Controller
 			// 'qty' => 'numeric',
 			// 'qty_bottle' => 'numeric',
 			// 'qty_content' => 'numeric',
+			'cost_price' => 'required|numeric',
 			'price' => 'required|numeric',
 		]);
 
@@ -102,6 +103,7 @@ class ItemController extends Controller
     	$qty = $request->qty;
     	$qty_content = $request->qty_content;
     	$qty_bottle = $request->qty_bottle;
+    	$cost_price = $request->cost_price;
     	$price_unit = $request->price;
 
         $unique_check = Item::where('categories_id', $categories_id)
@@ -114,14 +116,14 @@ class ItemController extends Controller
         }
 
     	$item_arr = [
-    	'users_id' => $users_id, 'categories_id' => $categories_id, 'i_name' => $i_name, 'is_rgb' => 0, 'qty' => $qty, 'price_unit' => $price_unit
+    	'users_id' => $users_id, 'categories_id' => $categories_id, 'i_name' => $i_name, 'is_rgb' => 0, 'qty' => $qty, 'cost_price' => $cost_price, 'price_unit' => $price_unit
     	];
 
     	// if ($is_rgb == 1)
     	if ($is_rgb)
     	{
 	    	$item_arr = [
-	    	'users_id' => $users_id, 'categories_id' => $categories_id, 'i_name' => $i_name, 'is_rgb' => 1, 'qty_bottle' => $qty_bottle, 'qty_content' => $qty_content, 'price_unit' => $price_unit, 'created_at' => $cust->time_now()
+	    	'users_id' => $users_id, 'categories_id' => $categories_id, 'i_name' => $i_name, 'is_rgb' => 1, 'qty_bottle' => $qty_bottle, 'qty_content' => $qty_content, 'cost_price' => $cost_price, 'price_unit' => $price_unit, 'created_at' => $cust->time_now()
 	    	];
 	    }
 	    $item_ins = DB::table('items')
@@ -146,6 +148,7 @@ class ItemController extends Controller
     	$qty = $request->qty;
     	$qty_content = $request->qty_content;
     	$qty_bottle = $request->qty_bottle;
+    	$cost_price = $request->cost_price;
     	$price_unit = $request->price;
 
 		$item->i_name = strtoupper($request->item);
@@ -166,6 +169,7 @@ class ItemController extends Controller
 	    }
 	    // var_dump($item);exit;
 
+		$item->cost_price = $cost_price;
 	    $item->save();
 		$request->session()->flash('flash_message_success', 'Item Updated');
 	    // return $this->index();
