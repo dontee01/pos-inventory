@@ -291,8 +291,8 @@
     <div class="receipt" id="receipt-content">
         <!-- Receipt Header -->
         <div class="header">
-            <div class="company-name">Sahlat Ltd</div>
-            <div class="company-address">Laderin Abk, Ogun State</div>
+            <div class="company-name">{{ env('COMPANY_NAME') }}</div>
+            <div class="company-address">{{ env('COMPANY_ADDRESS') }}</div>
             <div class="company-contact">08067275241, 08054942852</div>
         </div>
 
