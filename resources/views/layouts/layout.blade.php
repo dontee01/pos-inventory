@@ -118,9 +118,29 @@
         $('#is-discount').prop('checked', false);
         $('#purchase-rebate').hide();
 
-        $('#sales-paid-transferred').hide();
+        $('#sales-paid-cash').hide();
+        $('#sales-paid-bank').hide();
 
-        $('#discount').show();
+        if ($('#sales-method-payment').val() == 'cash_bank_transfer')
+        {
+            $('#sales-paid-cash').show();
+            $('#sales-paid-bank').show();
+        }
+        
+        total = parseFloat($('#sales-total').val());
+        paid = parseFloat($('#sales-paid').val());
+        diff = parseFloat( total - paid );
+        
+        if (diff > 0)
+        {
+            $('#discount').show();
+        }
+        else
+        {
+            $('#discount').hide();
+        }
+
+        // $('#discount').show();
         $('#sales-paid').on('input', function(){
             total = parseFloat($('#sales-total').val());
             paid = parseFloat($('#sales-paid').val());
@@ -136,15 +156,17 @@
             }
         });
 
-        $('#method-payment').on('change', function(){
+        $('#sales-method-payment').on('change', function(){
             method = $(this).val();
             if (method == 'cash_bank_transfer')
             {
-                $('#sales-paid-transferred').show();
+                $('#sales-paid-cash').show();
+                $('#sales-paid-bank').show();
             }
             else
             {
-                $('#sales-paid-transferred').hide();
+                $('#sales-paid-cash').hide();
+                $('#sales-paid-bank').hide();
             }
         });
 

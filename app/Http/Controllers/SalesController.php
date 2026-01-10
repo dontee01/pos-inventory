@@ -126,6 +126,19 @@ class SalesController extends Controller
             return redirect('/sales');
         }
 
+        if ($request->payment_method =='cash_bank_transfer')
+        {
+            $validate = $request->validate([
+                'cash' => 'required|numeric',
+                'bank' => 'required|numeric'
+            ]);
+            // if ($validate->fails())
+            // {
+            //     $request->session()->flash('flash_message', 'Payment details are invalid');
+            //     return redirect()->backWithErrors($validate)->withInput();
+            // }
+        }
+        
         $orders = PendingOrder::where('transaction_ref', $transaction_ref)
                 ->where('is_confirmed', 1)
                 ->get();
@@ -199,6 +212,13 @@ class SalesController extends Controller
             $sales->name = ucfirst($request->name);
             $sales->is_debtor_discount = $is_discount;
             $sales->difference = $difference;
+
+            // if ($request->payment_method =='cash_bank_transfer')
+            // {
+                $sales->amount_paid_cash = $request->cash ?? 0;
+                $sales->amount_paid_bank = $request->bank ?? 0;
+            // }
+
             $sales->save();
 
 

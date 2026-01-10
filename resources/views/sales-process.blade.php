@@ -101,8 +101,8 @@
                             
                         </div>
                         <div class="m-t-sm">
-                          
-                        <form action="{{url('sales/checkout/'.$transaction_ref)}}" method="post">
+
+                        <form id="sales-checkout-form" action="{{url('sales/checkout/'.$transaction_ref)}}" method="post">
                         {{csrf_field()}}
                             <div class=" form-inline">
 
@@ -111,17 +111,12 @@
                                     <span class="help-block small">Total</span>
                                 </div>
                                 <div class="form-group form-group-sm">
-                                    <input class="input-sm" type="text" name="amount" id="sales-paid" title="Amount Paid" required="required" />
+                                    <input class="input-sm" type="text" name="amount" id="sales-paid" title="Amount Paid" required="required" value="{{ old('amount') }}" />
                                     <span class="help-block small">Amount Paid</span>
                                 </div>
 
-                                <div id="sales-paid-transferred" class="form-group form-group-sm">
-                                    <input class="input-sm" type="text" name="amountTransferred" id="sales-paid-transferred" title="Amount Transferred" />
-                                    <span class="help-block small">Amount Transferred</span>
-                                </div>
-
                                 <div id="method-payment" class="form-group form-group-sm">
-                                    <select id="method-payment" class="input-sm" name="payment_method" title="Select" required="required" >
+                                    <select id="sales-method-payment" class="input-sm" name="payment_method" title="Select" required="required" >
                                         {{-- <option value="">Select</option> --}}
                                         <option value="cash" selected="selected">Cash</option>
                                         <option value="bank_transfer">Bank Transfer</option>
@@ -142,8 +137,19 @@
                                 </div>
 
                                 <div class="form-group form-group-sm">
-                                    <input class="input-sm" type="text" name="name" id="check-quantity-bottle" title="Customer name" required="required" />
+                                    <input class="input-sm" type="text" name="name" id="check-quantity-bottle" title="Customer name" required="required" value="{{ old('name') }}" />
                                     <span class="help-block small">Name on receipt</span>
+                                </div>
+                                
+
+                                <div id="sales-paid-cash" class="form-group form-group-sm">
+                                    <input class="input-sm" type="text" name="cash" id="sales-cash-paid" title="Cash Paid" value="{{ old('cash') }}" />
+                                    <span class="help-block small">Amount Paid (Cash)</span>
+                                </div>
+
+                                <div id="sales-paid-bank" class="form-group form-group-sm">
+                                    <input class="input-sm" type="text" name="bank" id="sales-bank-paid" title="Amount Paid (Bank Transfer)" value="{{ old('bank') }}" />
+                                    <span class="help-block small">Amount Paid (Bank Transfer)</span>
                                 </div>
 
 

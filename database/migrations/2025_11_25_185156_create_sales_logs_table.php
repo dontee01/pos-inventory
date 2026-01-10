@@ -24,6 +24,8 @@ return new class extends Migration
             // $table->string('qty_content')->nullable();
             $table->decimal('total', 10, 2);
             $table->decimal('amount_paid', 10, 2);
+            $table->decimal('amount_paid_cash', 10, 2);
+            $table->decimal('amount_paid_bank', 10, 2);
             $table->enum('payment_method', ['cash', 'bank_transfer', 'credit_debit_card']);
             $table->string('receipt');
             $table->string('name');
