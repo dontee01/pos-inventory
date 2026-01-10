@@ -163,7 +163,7 @@ class ReportController extends Controller
 
                 $item_arr = [
                     'id' => $order->id, 'receipt' => $receipt, 'total' => $order->total, 'd_name' => $order->d_name, 
-                    'amount_paid' => $order->amount_paid, 'transaction_ref' => $order->transaction_ref, 'discount' => $discount, 'payment_method' => $order->payment_method, 
+                    'amount_paid' => $order->amount_paid, 'amount_paid_cash' => $order->amount_paid_cash, 'amount_paid_bank' => $order->amount_paid_bank, 'transaction_ref' => $order->transaction_ref, 'discount' => $discount, 'payment_method' => $order->payment_method, 
                     'created' => $order->updated_at, 'difference' => $order->difference, 'name' => $order->name
                 ];
                 array_push($result, $item_arr);

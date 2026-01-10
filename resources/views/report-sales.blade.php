@@ -40,6 +40,8 @@
         <th>Customer</th>
         <th>Discount</th>
         <th>Payment Method</th>
+        <th>Payment Cash</th>
+        <th>Payment Bank</th>
         <th>Total Sales</th>
         <th>Difference</th>
         <th>Amount Paid</th>
@@ -54,6 +56,8 @@
         <td>{{$item['name']}}</td>
         <td>{{$item['discount']}}</td>
         <td>{{$item['payment_method']}}</td>
+        <td>{{$item['amount_paid_cash']}}</td>
+        <td>{{$item['amount_paid_bank']}}</td>
         <td>{{$item['total']}}
         <input type="hidden" id="id-add-item" value="{{$item['id']}}" />
         </td>
@@ -66,7 +70,7 @@
     </tr>
     @endforeach
     <tr>
-        <td colspan="8" align="right">
+        <td colspan="10" align="right">
         <strong>Grand Total Sales</strong>
         </td>
         <td>
@@ -74,7 +78,7 @@
         </td>
     </tr>
     <tr>
-        <td colspan="8" align="right">
+        <td colspan="10" align="right">
         <strong>Grand Total Paid</strong>
         </td>
         <td>
