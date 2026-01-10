@@ -3,9 +3,9 @@ namespace App\Libraries;
 
 use DateTime;
 
-use App\Item;
-use App\Cart;
-use App\Cart_purchase;
+use App\Models\Item;
+use App\Models\Cart;
+use App\Models\CartPurchase;
 
 use DB;
 /**
@@ -274,7 +274,7 @@ class Custom
 
     public function revert_purchases($cart_session)
     {
-        $check_cart = Cart_purchase::where('cart_session', $cart_session)
+        $check_cart = CartPurchase::where('cart_session', $cart_session)
             ->where('store_users_id', \Session::get('id'))
             ->where('is_confirmed', 0)
             ->get();
@@ -285,7 +285,7 @@ class Custom
         }
         DB::transaction(function() use ($cart_session){
 
-            $carts = Cart_purchase::where('cart_session', $cart_session)
+            $carts = CartPurchase::where('cart_session', $cart_session)
                 ->where('store_users_id', \Session::get('id'))
                 ->where('is_confirmed', 0)
                 ->get();
@@ -325,7 +325,7 @@ class Custom
                         ->decrement('qty_content', $quantity);
                 }
 
-                Cart_purchase::destroy($cart->id);
+                CartPurchase::destroy($cart->id);
             }
 
         });
