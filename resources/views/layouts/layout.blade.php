@@ -118,6 +118,8 @@
         $('#is-discount').prop('checked', false);
         $('#purchase-rebate').hide();
 
+        $('#sales-paid-transferred').hide();
+
         $('#discount').show();
         $('#sales-paid').on('input', function(){
             total = parseFloat($('#sales-total').val());
@@ -131,6 +133,18 @@
             else
             {
                 $('#discount').hide();
+            }
+        });
+
+        $('#method-payment').on('change', function(){
+            method = $(this).val();
+            if (method == 'cash_bank_transfer')
+            {
+                $('#sales-paid-transferred').show();
+            }
+            else
+            {
+                $('#sales-paid-transferred').hide();
             }
         });
 

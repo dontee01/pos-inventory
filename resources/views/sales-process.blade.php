@@ -115,12 +115,18 @@
                                     <span class="help-block small">Amount Paid</span>
                                 </div>
 
+                                <div id="sales-paid-transferred" class="form-group form-group-sm">
+                                    <input class="input-sm" type="text" name="amountTransferred" id="sales-paid-transferred" title="Amount Transferred" />
+                                    <span class="help-block small">Amount Transferred</span>
+                                </div>
+
                                 <div id="method-payment" class="form-group form-group-sm">
                                     <select id="method-payment" class="input-sm" name="payment_method" title="Select" required="required" >
                                         {{-- <option value="">Select</option> --}}
                                         <option value="cash" selected="selected">Cash</option>
                                         <option value="bank_transfer">Bank Transfer</option>
-                                        <option value="credit_debit_card">Credit/Debit Card</option>
+                                        <option value="cash_bank_transfer">Cash + Bank Transfer</option>
+                                        <option value="goods_transfer">Goods Transfer</option>
                                     </select>
                                 <span class="help-block small">Mode of Payment</span>
                                 </div>
@@ -130,6 +136,7 @@
                                         <option value="">Select</option>
                                         <option value="1">Discount</option>
                                         <option value="2">Debtor</option>
+                                        {{-- <option value="3">Goods Transfer</option> --}}
                                     </select>
                                 <span class="help-block small">Debtor/Discount</span>
                                 </div>

@@ -344,7 +344,7 @@
                         <span class="status-badge status-balance">BALANCE</span>
                     @endif
                 </span>
-                <span>₦{{ $difference }}</span>
+                <span>{{ $difference }}</span>
             </div>
             @endif
         </div>
