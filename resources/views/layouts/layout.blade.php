@@ -322,6 +322,38 @@
         });
 
     })
+
+
+    function exportTableToCSV(tableId, filename) {
+        const table = document.getElementById(tableId);
+        let csv = [];
+        const rows = table.querySelectorAll('tr');
+
+        for (const row of rows) {
+            const rowData = [];
+            // Select all table header (th) and table data (td) cells in the current row
+            const cols = row.querySelectorAll('td, th'); 
+            for (const col of cols) {
+                // Get inner text and escape double quotes
+                let text = col.innerText;
+                text = text.replace(/"/g, '""'); 
+                rowData.push(`"${text}"`);
+            }
+            csv.push(rowData.join(','));
+        }
+
+        // Create a Blob object and a downloadable link
+        const csvFile = new Blob([csv.join('\n')], { type: 'text/csv;charset=utf-8;' });
+        const downloadLink = document.createElement('a');
+
+        downloadLink.download = filename || 'export.csv';
+        downloadLink.href = URL.createObjectURL(csvFile);
+        downloadLink.style.display = 'none';
+
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    }
 </script>
 </div>
 </body>
