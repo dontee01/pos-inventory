@@ -503,7 +503,7 @@ class SalesController extends Controller
             $qty_content = Item::where('id', $request->item_id)
             ->value('qty_content');
             $item_check = $qty_content - $request->quantity;
-            if ($item_check < 1)
+            if ($item_check < 0)
             {
                 $request->session()->flash('flash_message', 'Stock is too low for this transaction!!');
                 return redirect()->back();
@@ -523,7 +523,7 @@ class SalesController extends Controller
             $qty = Item::where('id', $request->item_id)
             ->value('qty');
             $item_check = $qty - $request->quantity;
-            if ($item_check < 1)
+            if ($item_check < 0)
             {
                 $request->session()->flash('flash_message', 'Stock is too low for this transaction!!');
                 return redirect()->back();
