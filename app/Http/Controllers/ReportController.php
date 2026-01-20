@@ -338,12 +338,12 @@ class ReportController extends Controller
 
                     if ($order->is_rgb == 1)
                     {
-                        $amount = $order->qty_content * $order->price_unit;
+                        $amount = $order->qty_content * $order->cost_price;
                     }
 
                     if ($order->is_rgb == 0)
                     {
-                        $amount = $order->qty * $order->price_unit;
+                        $amount = $order->qty * $order->cost_price;
                     }
                     $total += $amount;
                     // get categoriesId and item name using itemId from cart table

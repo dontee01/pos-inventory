@@ -405,7 +405,7 @@
         <a href="javascript:window.print()" class="btn btn-print">
             <i class="fa fa-print"></i> Print Receipt
         </a>
-        <a class="btn btn-close" href="{{ url('/sales') }}">
+        <a class="btn btn-close" href="{{ url('/sales/individual') }}">
             <i class="fa fa-times"></i> Close
         </a>
         {{-- <button class="btn" onclick="openEmailModal()">

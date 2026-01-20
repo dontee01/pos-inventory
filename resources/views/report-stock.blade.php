@@ -63,6 +63,8 @@
     </tr>
     </tbody>
 </table>
+<button onclick="exportTableToCSV('table-custom', 'stock-report.csv')">Export to Excel</button>
+
 <div align="center">
     <!-- <h4>Empty Crates</h4> -->
     <h4>Total Bottles</h4>

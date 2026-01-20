@@ -78,6 +78,7 @@
     </tr>
     </tbody>
 </table>
+<button onclick="exportTableToCSV('table-custom', 'orders-report.csv')">Export to Excel</button>
 
 <div align="center">
     <h4>Empty Bottles</h4>

@@ -106,7 +106,7 @@
                     {{csrf_field()}}
                      <!-- <a href="{{url('/cart/checkout/'.$cart['id'])}}">Checkout</a> -->
                         <input class="input-sm" type="hidden" name="sales_cart_session" id="check-quantity-cart-session" readonly="readonly" value="{{Session::get('sales_cart_session')}}" />
-                        <button class="btn btn-danger btn-rounded btn-block" id="add-to-cart" type="submit">Checkout</button>
+                        <button class="btn btn-danger btn-rounded btn-block" id="add-to-cart" type="submit">Process Cart</button>
 
                     </form>
                 </div>

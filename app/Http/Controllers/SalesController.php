@@ -30,6 +30,7 @@ class SalesController extends Controller
     public function index()
     {
         $orders = PendingOrder::where('is_confirmed', 1)
+                ->where('deleted', 0)
                 // ->groupBy('transaction_ref')
                 ->get();
         // $orders = PendingOrder::selectRaw('MAX(id) as id, transaction_ref')
@@ -503,7 +504,7 @@ class SalesController extends Controller
             $qty_content = Item::where('id', $request->item_id)
             ->value('qty_content');
             $item_check = $qty_content - $request->quantity;
-            if ($item_check < 1)
+            if ($item_check < 0)
             {
                 $request->session()->flash('flash_message', 'Stock is too low for this transaction!!');
                 return redirect()->back();
@@ -523,7 +524,7 @@ class SalesController extends Controller
             $qty = Item::where('id', $request->item_id)
             ->value('qty');
             $item_check = $qty - $request->quantity;
-            if ($item_check < 1)
+            if ($item_check < 0)
             {
                 $request->session()->flash('flash_message', 'Stock is too low for this transaction!!');
                 return redirect()->back();
@@ -544,13 +545,14 @@ class SalesController extends Controller
 
     public function cart_checkout(Request $request)
     {
+        $transaction_ref = '';
         if (!session()->has('sales_cart_session'))
         {
             // redirect if cart session does not exist
             $request->session()->flash('flash_message', 'Cart is empty');
             return redirect('/sales');
         }
-        DB::transaction(function() use ($request)
+        DB::transaction(function() use ($request, &$transaction_ref)
         {
             $cart = Cart::where('cart_session', $request->sales_cart_session)
                 ->update(['is_confirmed' => 1]);
@@ -560,6 +562,7 @@ class SalesController extends Controller
             ->get();
             foreach ($cart_orders as $cart_order)
             {
+                $transaction_ref = $cart_order->transaction_ref;
                 $p_order_data = [
                     'sales_users_id' => $cart_order->sales_users_id, 'item_id' => $cart_order->item_id,
                     'transaction_ref' => $cart_order->transaction_ref, 'd_name' => $cart_order->d_name,
@@ -568,13 +571,18 @@ class SalesController extends Controller
                     'returned_bottle' => $cart_order->returned_bottle, 'price_unit' => $cart_order->price_unit,
                     'price_total' => $cart_order->price_total, 'is_confirmed' => 1
                 ];
-
                 $p_order = PendingOrder::create($p_order_data);
                 
             }
 
 
         });
+
+        $request->session()->flash('flash_message_success', 'Cart processed, finalize payment');
+        \Session::forget('sales_cart_session');
+        \Session::forget('transaction_ref');
+        return redirect('/sales/transaction/'.$transaction_ref);
+
 
         $orders = PendingOrder::where('is_confirmed', 1)
                 // ->groupBy('transaction_ref')
