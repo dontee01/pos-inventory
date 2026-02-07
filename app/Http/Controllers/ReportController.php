@@ -275,7 +275,7 @@ class ReportController extends Controller
                         'id' => $order->id, 'i_name' => $item_name, 's_name' => $order->s_name, 'qty' => $order->qty, 'qty_rebate' => $order->qty_rebate, 'amount_paid' => $order->amount_paid, 
                         'price_total' => $order->price_total, 'transaction_ref' => $order->transaction_ref, 
                         'exchange_type' => $exchange_type, 'created' => $order->updated_at, 
-                        'price_unit' => $order->price_unit
+                        'price_unit' => $order->price_unit, 'cost_price' => $order->cost_price
                     ];
                     array_push($result, $item_arr);
                 }

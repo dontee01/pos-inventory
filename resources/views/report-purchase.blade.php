@@ -41,7 +41,7 @@
         <th>Exchange Type</th>
         <th>Quantity</th>
         <th>Rebate Quantity</th>
-        <th>Unit Price</th>
+        <th>Cost Price</th>
         <th>Total Purchases</th>
         <th>Amount Paid</th>
     </tr>
@@ -58,7 +58,7 @@
         </td>
         <td>{{$item['qty']}}</td>
         <td>{{$item['qty_rebate']}}</td>
-        <td>{{$item['price_unit']}}
+        <td>{{$item['cost_price']}}</td>
         <input type="hidden" id="id-add-item" value="{{$item['id']}}" />
         </td>
         <td>
